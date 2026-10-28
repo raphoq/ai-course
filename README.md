@@ -3,10 +3,17 @@
 ## S01E03 review and delivery
 
 Public repository: https://github.com/raphoq/ai-course. Sources, evidence and the complete
-static render are published. Course submission and acceptance are still pending.
+static render are published. The course accepted the two tickets at its first review;
+final acceptance is pending resubmission after the engineering update and ticket closure.
 
-- [Issue #1: shared parser — 379 reports](https://github.com/raphoq/ai-course/issues/1).
-- [Issue #2: booking-v3 date hint — 33 reports](https://github.com/raphoq/ai-course/issues/2).
+- [Issue #1: shared parser — 379 reports](https://github.com/raphoq/ai-course/issues/1): completed;
+  engineering reports a day-first parser fix.
+- [Issue #2: booking-v3 date hint — 33 reports](https://github.com/raphoq/ai-course/issues/2): not planned;
+  engineering retired booking-v3 rather than correcting its hint.
+
+The course reports #4471 closed on 5 October 2026. The update was read on 28 October;
+see `evidence/engineering-update.md` and its screenshot. These are engineering-reported
+outcomes, not production fixes tested by this review. Historical report counts are unchanged.
 
 The reviewed issue drafts are retained in `issues/parser.md` and `issues/hint.md`.
 No public hosting is required to inspect the included static site.

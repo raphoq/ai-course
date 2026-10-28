@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 review · two causes behind one ticket'
 owner: Rafał Łuczun
-status: proposed
+status: closed
 reviewed: '2026-10-28'
 signature: 'Rafał Łuczun · Codex · S01E03 · 2026-10-28'
 ---
@@ -14,30 +14,46 @@ signature: 'Rafał Łuczun · Codex · S01E03 · 2026-10-28'
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 </script>
 
-The 4 October export contradicts the [current incident summary](/kb/incidents/4471/):
+The 4 October export contradicts the [exported incident summary](/kb/incidents/4471/):
 one merged ticket contains two classified causes. The fixes need separate tracking.
-This review uses the exported snapshot; it does not establish the current production state.
+The evidence below describes that historical snapshot. A later engineering update supplies
+the closure outcomes; it does not add new report data or prove each unusual symptom resolved.
+
+## Engineering outcome · 5 October 2026
+
+The [course engineering update](https://hq.mega.dev/challenges/what-it-shows#engineering-update)
+reports that #4471 was closed on 5 October. It gives different outcomes for the two causes:
+
+- **Parser — fixed:** engineering reports `fix(dates): parse dd/mm for eu locales`.
+  [GitHub issue #1](https://github.com/raphoq/ai-course/issues/1) is closed as completed
+  on the strength of that report, not a production test performed by this review.
+- **Form hint — won't fix:** booking-v3 was retired.
+  [GitHub issue #2](https://github.com/raphoq/ai-course/issues/2) is closed as not planned;
+  this is retirement of the affected form, not a claim that its hint was corrected.
+
+The source update was read on 28 October 2026; its screenshot is included in repository
+evidence. The counts remain those of the 4 October export. Decision 0002 remains proposed.
 
 ## Evidence and counts
 
 <IncidentReview />
 
-## Separate the fixes
+## Separate the causes · historical diagnosis
 
 **Parser:** the shared parser reads month first for day-first tenants. A date such as
 7 April becomes 4 July. Keep the parser reports together across app, email and the
 booking-v2 form. Reports from booking-v3 tenants through app or email still belong here.
-Fix parsing to follow the tenant's date contract and verify round trips through invites.
+The required fix was parsing according to the tenant's date contract and verifying invite round trips.
 Track the five unusual bodies above as unresolved evidence within this ticket.
 
 **Form hint:** booking-v3 prints `MM/DD/YYYY` while the form reads dates in the tenant's
 day-first order. Users follow the displayed hint and submit a date the form interprets
 differently. This affects form reports for Alder Physio, Copper Studio and Pale Harbour.
-Correct the hint and align form validation with the tenant's locale. A parser fix alone
-does not correct that instruction. Verify both the displayed format and the resulting date.
+The proposed remediation was to align the hint and form validation with the tenant's locale.
+A parser fix alone would not correct that instruction. Engineering instead retired booking-v3.
 
 The exact report IDs and reproducible count output are in `evidence/analysis.json`.
-See the repository README for publication status and, once created, the GitHub issue links.
+See the repository README for publication status and both GitHub issue links.
 
 ## Why the queue stayed wrong
 
@@ -63,14 +79,15 @@ before relying on prose, even when an incident page was reviewed recently.
 <QueueTimeline ticket={4471} />
 
 Compare arrival time with merge time before treating a queue spike as a new outage.
-The desk is still working: reconcile new reports by ID, reclassify against the tenant
-directory, retain uncertain symptoms, and update counts before closing either issue.
+During an active incident, reconcile new reports by ID, reclassify against the tenant
+directory and retain uncertain symptoms. This export is not a live queue.
 For the one-day and cross-city reports, request the original date input, timezone,
 stored timestamp, invite payload and affected form version. These reports suggest further
 investigation; this export does not prove a timezone defect or any specific third cause.
 
-Do not close the parent merely because a parser fix is queued. Close each child only after
-its reproduction passes and incoming reports stop reproducing that cause. Have the support
-desk review this proposal and the replacement decision before adopting them.
+The engineering update above is the authority for closing the two tracking issues; a
+queued fix alone would not have justified closure. The five unusual bodies remain unresolved
+evidence in this snapshot. Reopen or split follow-up work if a reproduction establishes a
+remaining defect. Have the support desk review the replacement decision before adopting it.
 
 <RenderStamp {signature} />
