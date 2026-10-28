@@ -2,9 +2,14 @@
 
 ## S01E03 review and delivery
 
-Target repository: https://github.com/raphoq/ai-course. Publication is pending; the two
-issue drafts are `issues/parser.md` and `issues/hint.md`. Actual issue links will be
-added after creation. No public hosting is required to inspect the included static site.
+Public repository: https://github.com/raphoq/ai-course. Sources, evidence and the complete
+static render are published. Course submission and acceptance are still pending.
+
+- [Issue #1: shared parser — 379 reports](https://github.com/raphoq/ai-course/issues/1).
+- [Issue #2: booking-v3 date hint — 33 reports](https://github.com/raphoq/ai-course/issues/2).
+
+The reviewed issue drafts are retained in `issues/parser.md` and `issues/hint.md`.
+No public hosting is required to inspect the included static site.
 
 - Review source: `src/routes/kb/incidents/4471-review/+page.svx`.
 - Replacement decision proposal: `src/routes/kb/decisions/0002-dedupe-by-cause/+page.svx`.
