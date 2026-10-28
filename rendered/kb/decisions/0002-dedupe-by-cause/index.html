@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><link href="../../../_app/immutable/entry/start.DFO4KBhV.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/-v_Lc1Yp.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/PwP9z52V.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/D1CBmWJ_.js" rel="modulepreload">
+		<link href="../../../_app/immutable/entry/app.DwVO90nl.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/V_G1QXe1.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/CwAW9WFE.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/BvfZsH8o.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/Bj2eesJi.js" rel="modulepreload">
+		<link href="../../../_app/immutable/nodes/0.DQTLkHfP.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/5qoTi-ut.js" rel="modulepreload">
+		<link href="../../../_app/immutable/nodes/4.DrBwVRb3.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/BsIATy11.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/olutZ4Je.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/B1tuVcTH.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/E-i5aitW.js" rel="modulepreload">
+		<link href="../../../_app/immutable/chunks/DjtHhDRa.js" rel="modulepreload">
+		<!--e2jw2j--><!----><title>0002 · Merge reports by demonstrated cause · support kb</title>
+		<link href="../../../_app/immutable/assets/runbook.BhhgOc_n.css" rel="stylesheet">
+		<link href="../../../_app/immutable/assets/DedupeExplorer.C3mwiGDj.css" rel="stylesheet">
+		<link href="../../../_app/immutable/assets/RenderStamp.CMZ6TBbc.css" rel="stylesheet"></head>
+  <body data-sveltekit-preload-data="hover"><div style="display: contents"><!--[--><!--[0--><!--[--><!--[--><div class="kb svelte-e2jw2j"><header><a class="crumb svelte-e2jw2j" href="/kb">support desk · kb</a> <h1 class="svelte-e2jw2j">0002 · Merge reports by demonstrated cause</h1> <p class="meta svelte-e2jw2j"><span>owner <b>Rafał Łuczun</b></span> <span class="status proposed svelte-e2jw2j">proposed</span> <span class="svelte-e2jw2j">reviewed 2026-10-28 · 0 days ago</span></p></header> <!--[-1--><!--]--> <main><p><strong>Date:</strong> 28 October 2026 · <strong>Proposed by:</strong> Rafał Łuczun with Codex</p> <h2>Context</h2> <p>The <a href="/kb/incidents/4471-review/">review of #4471</a> shows that subjects and browser-derived
+intake tags do not reliably identify a defect. An incident can contain several causes.
+This proposal replaces <a href="/kb/decisions/0001-dedupe-by-subject/">0001</a> when accepted by the desk.
+Record 0001 is preserved unchanged.</p> <h2>Decision</h2> <p>Read the body and consult tenant locale, booking form version and channel. Merge only
+when the cause is demonstrated to be the same. For this snapshot, <code>causes.ts</code> distinguishes
+the shared month-first parser from the booking-v3 month-first hint on a day-first form.
+Do not use browser locale, intake tags or subject equality as the deciding evidence.</p> <p>Count each report ID once. Keep evidence that contradicts a classification visible and
+request a reproduction. Missing tenants or an unexplained symptom need investigation;
+leave them apart until a cause is established. Reconcile new arrivals while the desk works.</p> <h2>Examples and consequences</h2> <div class="try svelte-gq0h2h"><!--[--><fieldset class="svelte-gq0h2h"><legend>report A</legend> <select aria-label="tenant"><!--[--><option selected="">alder.physio</option><option>copper.studio</option><option>harbour.dental</option><option>kettle.books</option><option>lantern.row</option><option>long.table</option><option>morrow.tax</option><option>nine.lanterns</option><option>pale.harbour</option><option>ridge.clinic</option><option>stone.and.sons</option><!--]--></select> <select aria-label="channel"><!--[--><option>app</option><option>email</option><option selected="">form</option><!--]--></select> <input value="Booking on the wrong date" aria-label="subject"/> <code>hint</code></fieldset><fieldset class="svelte-gq0h2h"><legend>report B</legend> <select aria-label="tenant"><!--[--><option>alder.physio</option><option>copper.studio</option><option>harbour.dental</option><option selected="">kettle.books</option><option>lantern.row</option><option>long.table</option><option>morrow.tax</option><option>nine.lanterns</option><option>pale.harbour</option><option>ridge.clinic</option><option>stone.and.sons</option><!--]--></select> <select aria-label="channel"><!--[--><option>app</option><option>email</option><option selected="">form</option><!--]--></select> <input value="Booking on the wrong date" aria-label="subject"/> <code>parser</code></fieldset><!--]--> <p class="verdict svelte-gq0h2h">different causes — keep apart</p></div> <table><thead><tr><th>case</th><th>same subject</th><th>same cause</th></tr></thead><tbody><!--[--><tr><td>app vs email, same tenant</td><td>no</td><td class="svelte-gq0h2h dup">yes</td></tr><tr><td>same subject, same tenant, different channel</td><td>yes</td><td class="svelte-gq0h2h">no</td></tr><tr><td>same subject, same channel, different tenant</td><td>yes</td><td class="svelte-gq0h2h">no</td></tr><tr><td>different subject, same way in</td><td>no</td><td class="svelte-gq0h2h dup">yes</td></tr><tr><td>no tenant on file</td><td>yes</td><td class="svelte-gq0h2h">no</td></tr><!--]--></tbody></table><!----> <p>This original explorer demonstrates the exported tenant/form/channel classifier only.
+Its “same cause — merge” label is preliminary; it does not read the bodies or establish
+that merging is justified. Apply the evidence checks above before any merge.</p> <p>This takes more reading than subject matching, but prevents a queued fix from hiding a
+different defect. It also merges different subjects that describe the same cause. Review
+the rule when new products, forms or symptoms appear; the current classifier covers only
+the date problems evidenced in this export.</p> <!--[0--><p class="stamp svelte-1280m42">desk ref <b class="svelte-1280m42">DR-CTMA-WVHJ</b></p><!--]--><!----><!----></main> <footer class="svelte-e2jw2j">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!--]--><!----><!--]--><!--]--> <!--[-1--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_1894es7 = {
+						base: new URL("../../..", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("../../../_app/immutable/entry/start.DFO4KBhV.js"),
+						import("../../../_app/immutable/entry/app.DwVO90nl.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 4],
+							data: [null,null],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div></body>
+</html>

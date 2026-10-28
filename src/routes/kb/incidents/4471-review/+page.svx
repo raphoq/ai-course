@@ -1,0 +1,76 @@
+---
+layout: runbook
+title: '#4471 review · two causes behind one ticket'
+owner: Rafał Łuczun
+status: proposed
+reviewed: '2026-10-28'
+signature: 'Rafał Łuczun · Codex · S01E03 · 2026-10-28'
+---
+
+<script>
+  import IncidentReview from '#lib/kb/IncidentReview.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+The 4 October export contradicts the [current incident summary](/kb/incidents/4471/):
+one merged ticket contains two classified causes. The fixes need separate tracking.
+This review uses the exported snapshot; it does not establish the current production state.
+
+## Evidence and counts
+
+<IncidentReview />
+
+## Separate the fixes
+
+**Parser:** the shared parser reads month first for day-first tenants. A date such as
+7 April becomes 4 July. Keep the parser reports together across app, email and the
+booking-v2 form. Reports from booking-v3 tenants through app or email still belong here.
+Fix parsing to follow the tenant's date contract and verify round trips through invites.
+Track the five unusual bodies above as unresolved evidence within this ticket.
+
+**Form hint:** booking-v3 prints `MM/DD/YYYY` while the form reads dates in the tenant's
+day-first order. Users follow the displayed hint and submit a date the form interprets
+differently. This affects form reports for Alder Physio, Copper Studio and Pale Harbour.
+Correct the hint and align form validation with the tenant's locale. A parser fix alone
+does not correct that instruction. Verify both the displayed format and the resulting date.
+
+The exact report IDs and reproducible count output are in `evidence/analysis.json`.
+See the repository README for publication status and, once created, the GitHub issue links.
+
+## Why the queue stayed wrong
+
+[Decision 0001](/kb/decisions/0001-dedupe-by-subject/) matches subjects alone.
+That can hide distinct causes behind identical wording, and can split one cause across
+different subjects. The live examples below compute this from tenant locale, form version
+and channel. Unknown tenants require investigation before merging.
+
+<DedupeExplorer />
+
+The original explorer above illustrates the exported classifier. Its “same cause — merge”
+label is a preliminary assignment, not proof of a shared cause or permission to merge.
+Read the bodies and resolve conflicting evidence before deciding.
+
+Review proposed [decision 0002](/kb/decisions/0002-dedupe-by-cause/) for future triage;
+adopt it only after the support desk accepts it. The accepted
+record 0001 remains intact as history. The old triage page was last reviewed in 2024;
+its accepted status does not make it current. Check rendered components and source data
+before relying on prose, even when an incident page was reviewed recently.
+
+## Timing and follow-up
+
+<QueueTimeline ticket={4471} />
+
+Compare arrival time with merge time before treating a queue spike as a new outage.
+The desk is still working: reconcile new reports by ID, reclassify against the tenant
+directory, retain uncertain symptoms, and update counts before closing either issue.
+For the one-day and cross-city reports, request the original date input, timezone,
+stored timestamp, invite payload and affected form version. These reports suggest further
+investigation; this export does not prove a timezone defect or any specific third cause.
+
+Do not close the parent merely because a parser fix is queued. Close each child only after
+its reproduction passes and incoming reports stop reproducing that cause. Have the support
+desk review this proposal and the replacement decision before adopting them.
+
+<RenderStamp {signature} />
