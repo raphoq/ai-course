@@ -28,7 +28,8 @@ human's approval. This records actual work performed; it does not imply course a
 - All original files under src/ match the archive byte for byte; the original README is
   extended with delivery instructions. New sources are additions.
 - All 44 generated files match the copy in rendered/. All 146 local references in the
-  generated HTML resolve to existing files. Both new pages contain DR-CTMA-WVHJ.
+  generated HTML resolve to existing files. The initial render contained DR-CTMA-WVHJ, derived from a self-chosen signature.
+  The course later required its issued ticket instead; this initial check did not establish course validity.
 - Browser navigation from the review to decision 0002 and back passed; CSS renders.
 - On the review, changing report A (Alder Physio) from form to app changes hint to parser
   and the verdict to same cause. Returning to form restores hint and different causes.
@@ -36,3 +37,13 @@ human's approval. This records actual work performed; it does not imply course a
 
 The browser used build/ served at port 4173; byte comparison confirms rendered/ contains
 the identical complete site. Production fixes were not tested and course acceptance is pending.
+
+## Course signature correction
+
+The course accepted the two tickets at its first review. After the engineering update
+and closure, the next review rejected the page because its signature was self-chosen.
+The exact ticket returned by start-challenge is now in both new pages as signature.
+The analysis script derives the desk ref from the review frontmatter rather than a
+hard-coded author string. The current reference is DR-KWRK-7XCH. The render and screenshots
+are regenerated and checked against this course-issued signature. This correction
+does not change report counts, issue scope, engineering outcomes or the proposed ADR.

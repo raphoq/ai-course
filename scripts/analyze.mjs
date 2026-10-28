@@ -13,6 +13,10 @@ const tenants = new Map(fs.readdirSync(new URL('tenants/', dir)).map(f => {
 const groups = groupByCause(reports, r => tenants.get(r.tenant));
 const counts = groups.map(({ reports, ...g }) => ({ ...g, count: reports.length, reportIds: reports.map(r => r.id) }));
 const notes = JSON.parse(fs.readFileSync(new URL('desk-notes.json', dir)));
+// The course-issued ticket in the page is the single source for the rendered desk ref.
+const reviewPage = fs.readFileSync(new URL('../src/routes/kb/incidents/4471-review/+page.svx', import.meta.url), 'utf8');
+const signature = reviewPage.match(/^signature: '([^']+)'$/m)?.[1];
+if (!signature) throw new Error('Missing review-page signature');
 const byMonth = field => Object.fromEntries([...new Set(reports.map(r => r[field].slice(0, 7)))].sort().map(m => [m, reports.filter(r => r[field].startsWith(m)).length]));
 const result = {
   rawRows: raw.length, uniqueReports: reports.length, repeatedRows: raw.length - reports.length,
@@ -25,7 +29,7 @@ const result = {
     incompleteDatePairs: reports.filter(r => INCOMPLETE_DATE_PAIRS.includes(r.id)),
     explicitSwapDescriptions: Object.fromEntries(groups.map(g => [g.cause, g.reports.filter(r => !notes.oneDayMove.includes(r.id) && !INCOMPLETE_DATE_PAIRS.includes(r.id)).length]))
   },
-  deskRef: deskRef('Rafał Łuczun · Codex · S01E03 · 2026-10-28')
+  deskRef: deskRef(signature)
 };
 fs.mkdirSync(new URL('../evidence/', import.meta.url), { recursive: true });
 fs.writeFileSync(new URL('../evidence/analysis.json', import.meta.url), JSON.stringify(result, null, 2) + '\n');

@@ -23,7 +23,7 @@ No public hosting is required to inspect the included static site.
 - Rendered pages: `rendered/kb/incidents/4471-review/index.html` and
   `rendered/kb/decisions/0002-dedupe-by-cause/index.html`, with all CSS/JS in `rendered/`.
 - Evidence: `evidence/analysis.json`; audit record: `evidence/audit-summary.md`.
-- Both added pages derive desk ref `DR-CTMA-WVHJ` from the frontmatter signature.
+- Both added pages derive desk ref `DR-KWRK-7XCH` from the frontmatter signature.
 
 The export contains 427 rows / 412 unique reports / 15 repeated rows. The exported
 tenant/form/channel classifier assigns 379 to parser and 33 to hint. A body audit found

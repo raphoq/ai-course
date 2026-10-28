@@ -4,7 +4,7 @@ title: '#4471 review · two causes behind one ticket'
 owner: Rafał Łuczun
 status: closed
 reviewed: '2026-10-28'
-signature: 'Rafał Łuczun · Codex · S01E03 · 2026-10-28'
+signature: 'v1.eyJzdWIiOiIyMTEwIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyMjY3OTksImV4cCI6MTc5MzMxMzE5OX0.niafCVrm1p4Md7VA4-gm_x_aw48-Isck1teboGKEMwk'
 ---
 
 <script>
